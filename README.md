@@ -1,6 +1,16 @@
-# e3dc grid charge
+# e3dc grid charge in a Docker image
 
-## What is this about?
+## Aim of this fork
+Take the project from https://github.com/moritzmair/e3dc_grid_charge and package it in a container to run
+
+## Setup
+- take config.json.example as a template and fill in your values
+- mount the config.json file to /usr/src/app/config.json
+  ```bash
+  docker run -d --name e3dc_grid_charge -v /path/to/config.json:/usr/src/app/config.json:ro --restart unless-stopped --network host lumoc/e3dc-tibber:latest
+  ```
+## Original README
+### What is this about?
 
 This will get prices from the tibber api, find out the cheapest hours and charge an E3 DC battey storage system via
 e3dc rscp protocol mainly based on https://github.com/git-kick/ioBroker.e3dc-rscp
@@ -20,9 +30,9 @@ Typical day where grid charging has been active for 2 hours in the night
 If you want to get in touch with me, just message me on Telegram:
 [@Master92](https://t.me/Master92) 🇩🇪🇬🇧
 
-### Where to get your tibber token?
+#### Where to get your tibber token?
 * https://developer.tibber.com/
-### Where to get your tibber home id?
+#### Where to get your tibber home id?
 * https://developer.tibber.com/explorer
 use the following request parameters to get all home id's and the according addresses
 ```
@@ -39,29 +49,8 @@ use the following request parameters to get all home id's and the according addr
   }
 }
 ```
-### Where to set the rscp password?
+#### Where to set the rscp password?
 * on your E3DC touch panel under personalize > user profile > scroll down
-
-
-## Setup
-* clone repo
-* ```cd e3dc_grid_charge```
-* ```sudo apt-get install npm```
-* ```npm install```
-* ```cp config.json.example config.json```
-* ```nano config.json``` (change config to fit your needs)
-
-
-## Start Server
-* ```node index.js```
-
-## How to run on a server
-It is a good idea to use this script on a raspberry pi, to run it you could use pm2:
-* ```sudo npm install pm2 --global```
-* ```pm2 startup``` (to autostart pm2 on boot)
-* ```pm2 start index.js```
-* ```pm2 save``` (to save that the line above should always be started on startup)
-* view logs with ```pm2 log```
 
 ## Found a bug/need a feature?
 Please use the Issue tracker on github
