@@ -31,8 +31,8 @@ const GRAPHQL_URL = 'https://api.tibber.com/v1-beta/gql';
 refresh_epex();
 
 
-cron.schedule('02 15 * * *', () => {
-  // run every day at 15:02
+cron.schedule('2 13,14,15 * * *', () => {
+  // run every day at 13,14,15:02
   refresh_epex();
 });
 
